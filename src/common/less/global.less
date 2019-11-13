@@ -1,0 +1,38 @@
+* {
+  margin:0;
+  padding: 0;
+}
+.clearfix {
+  *zoom:1;
+  &:after,
+  &:before
+  {
+    content: '';
+    display: table;
+  }
+  &:after {
+    clear: both;
+  }
+}
+a {
+  text-decoration: none;
+}
+ul {
+  list-style: none;
+}
+.f-l {
+  float: left;
+}
+.f-r {
+  float: right;
+}
+.badge-circle {
+    position: absolute;
+    text-align: center;
+    line-height: 24px;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: 1px solid #8b8da0;
+    background-color: rgba(0,0,0,0.6);
+}

@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../animation.js"></script>
+    <style>
+        .box {
+            position: absolute;
+            height: 100px;
+            width: 100px;
+            background-color: red;
+            left: 900px;
+        }
+    </style>
+</head>
+<body>
+<div class="box">
+
+</div>
+<script>
+animate(document.getElementsByClassName('box')[0],-1000);
+</script>
+</body>
+</html>

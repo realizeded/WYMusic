@@ -1,0 +1,9 @@
+const CHANGE_MUSIC = 'CHANGE_MUSIC';
+const LOAD_MUSIC = "LOAD_MUSIC";
+const SAVE_MUSIC = "SAVE_MUSIC";
+
+export {
+  CHANGE_MUSIC,
+  LOAD_MUSIC,
+  SAVE_MUSIC
+}
