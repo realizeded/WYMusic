@@ -1,7 +1,9 @@
 import {
   CHANGE_MUSIC,
   LOAD_MUSIC,
-  SAVE_MUSIC
+  SAVE_MUSIC,
+  DEL_MUSIC,
+  CHANG_ALL_MUSIC
 } from '../mutations-types.js';
 export default {
 [CHANGE_MUSIC](state,payLoad){
@@ -24,5 +26,11 @@ export default {
 },
 [SAVE_MUSIC](state) {
   sessionStorage.setItem('music',JSON.stringify(state.musicList));
+},
+[DEL_MUSIC](state,index) {
+  state.musicList.splice(index,1);
+},
+[CHANG_ALL_MUSIC](state,payload) {
+  state.musicList.unshift(...payload);
 }
 }

@@ -27,11 +27,32 @@
       "unicode_decimal": 59081
     },
     {
+      "icon_id": "736120",
+      "name": "error",
+      "font_class": "error",
+      "unicode": "e669",
+      "unicode_decimal": 58985
+    },
+    {
       "icon_id": "737824",
       "name": "更多",
       "font_class": "gengduo",
       "unicode": "e6d7",
       "unicode_decimal": 59095
+    },
+    {
+      "icon_id": "814613",
+      "name": "error",
+      "font_class": "flag-error",
+      "unicode": "e6b4",
+      "unicode_decimal": 59060
+    },
+    {
+      "icon_id": "899896",
+      "name": "垃圾桶",
+      "font_class": "lajitong01",
+      "unicode": "e671",
+      "unicode_decimal": 58993
     },
     {
       "icon_id": "944190",
@@ -67,6 +88,13 @@
       "font_class": "xiayishou",
       "unicode": "e633",
       "unicode_decimal": 58931
+    },
+    {
+      "icon_id": "1684921",
+      "name": "error",
+      "font_class": "error1",
+      "unicode": "e686",
+      "unicode_decimal": 59014
     },
     {
       "icon_id": "1932937",
@@ -132,6 +160,13 @@
       "unicode_decimal": 58947
     },
     {
+      "icon_id": "4437731",
+      "name": "error",
+      "font_class": "error2",
+      "unicode": "e60c",
+      "unicode_decimal": 58892
+    },
+    {
       "icon_id": "4582719",
       "name": "更多",
       "font_class": "gengduo1",
@@ -165,6 +200,13 @@
       "font_class": "video3",
       "unicode": "e60b",
       "unicode_decimal": 58891
+    },
+    {
+      "icon_id": "5911304",
+      "name": "icon-error",
+      "font_class": "error3",
+      "unicode": "e619",
+      "unicode_decimal": 58905
     },
     {
       "icon_id": "6345968",
@@ -221,6 +263,20 @@
       "font_class": "video4",
       "unicode": "e647",
       "unicode_decimal": 58951
+    },
+    {
+      "icon_id": "9227838",
+      "name": "error",
+      "font_class": "error4",
+      "unicode": "e6e9",
+      "unicode_decimal": 59113
+    },
+    {
+      "icon_id": "9532170",
+      "name": "error",
+      "font_class": "error5",
+      "unicode": "e60f",
+      "unicode_decimal": 58895
     },
     {
       "icon_id": "10078244",

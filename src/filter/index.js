@@ -10,5 +10,5 @@ Vue.filter('durationFormat',function(msg){
   let minute = parseInt(num /60);
   let second = parseInt((num - minute*60));
 
-  return `0${minute}:${second}`;
+  return `0${minute}:${(second+"").padStart(2,"0")}`;
 });

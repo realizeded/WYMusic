@@ -2,13 +2,14 @@
   <div class="radioPlayPage" ref="radioBG" >
     <div class="musicList" v-show="musicListIsShow">
       <div>
-        <ul>
+        <x-audio-list :musics="$store.getters.musics" @delitem="delItem" @selectmusic="selectMusic"></x-audio-list>
+       <!-- <ul>
           <li v-for="(item,index) in $store.getters.musics" :key="index" @click="selectMusic(index)"><a href="#">{{item.name}}</a></li>
-        </ul>
+        </ul>-->
       </div>
     </div>
     <div class="bgk" ref="bgk" @click="musicListIsShow = false"></div>
-    <xhead :bgc="'transparent'">
+    <xhead :bgc="'transparent'" class="nbv">
       <template #center>
         <div class="heads">
           <p>{{musicInfo.name||""}}</p>
@@ -25,9 +26,9 @@
     <div class="musice-duration">
       <div class="contains">
 
-        <div ref="line">
+        <div ref="line"  @touchmove="touchmove" class="line">
           <div class="progressRadio" :style="{'width':`${offset}px`}">
-            <div class="circle"></div>
+            <div class="circle" @touchstart="circlestart" @touchend="circleend"></div>
           </div>
         </div>
       </div>
@@ -35,7 +36,7 @@
       <div class="du-right">{{Ttime|durationFormat}}</div>
     </div>
     <div class="main">
-    1
+
     </div>
     <div class="control">
       <div><i class="l-icon icon-random"></i></div>
@@ -48,24 +49,55 @@
 
       <div @click.stop="musicListIsShow=true"><i class="l-icon icon-list-menu"></i></div>
     </div>
-   <audio ref="ra" @timeupdate="playProgress($event)" :src="`https://music.163.com/song/media/outer/url?id=${cuc}.mp3 `" autoplay @canplay="getDuration"></audio>
+   <audio ref="ra" @timeupdate="playProgress($event)" :src="`https://music.163.com/song/media/outer/url?id=${cuc}.mp3 `" autoplay @canplay="getDuration" @ended="nextMusic"></audio>
 
   </div>
 </template>
 <script>
+  import {mapActions} from 'vuex';
   export default {
         name:"radioPlayPage",
         data(){
-            return {cuIndex:0,musicListIsShow:false,offset:0,musicInfo:{},playing:true,bg:"12",Ttime:0,currentTime:0.00,cuc:this.$route.params.id};
+            return {isTouch:false,cuIndex:0,musicListIsShow:false,offset:0,musicInfo:{},playing:true,bg:"12",Ttime:0,currentTime:0.00,cuc:this.$route.params.id};
         },
         created:function() {
                 this.getMusicInfo();
                 this.$store.dispatch('load');
+
         },
         mounted(){
+
             this.$refs.radioBG.style.height = window.innerHeight+'px';
         },
         methods:{
+            ...mapActions(['delMusic']),
+            async getLyric() {
+               const {data:res} = await this.$axios.get(`lyric?id=33894312`);
+                console.log(1);
+               console.log(res);
+               },
+            delItem(index) {
+
+                this.delMusic(index);
+            },
+            touchmove(el) {
+                el = el || window.event;
+                let pointerX = el.changedTouches[0].pageX;
+                let x = pointerX - this.$refs.line.offsetLeft;
+                let lineWidth = this.$refs.line.clientWidth;
+                let time = this.Ttime * (x/this.$refs.line.clientWidth);
+               if(this.isTouch&&(x>=0&&x<=lineWidth)) {
+                   this.offset = x;
+                   this.$refs.ra.currentTime = time;
+                   this.currentTime = time;
+               }
+            },
+            circleend() {
+                this.isTouch = false;
+            },
+            circlestart() {
+              this.isTouch = true;
+            },
             selectMusic(index) {
                 this.musicInfo = this.$store.getters.musics[index];
                 this.cuc = this.musicInfo.id;
@@ -113,17 +145,19 @@
                   return;
               this.musicInfo = res.songs[0];
               this.bg = res.songs[0].al.picUrl;
+                this.getLyric();
           }
         },
         watch:{
-          bg:function(nval){
-              this.$refs.bgk.style.backgroundImage =`url(${nval})`;
+            musicInfo:function(nval){
+              this.$refs.bgk.style.backgroundImage =`url(${nval.al.picUrl})`;
           }
 
 
         },
         components:{
-            xhead:()=>(import ('../../components/tabbar-header/index.vue'))
+            xhead:()=>(import ('../../components/tabbar-header/index.vue')),
+            xAudioList:()=>(import ('../../components/audioList/index.vue'))
         }
   }
 </script>
@@ -138,12 +172,12 @@
    left: 0;
    bottom: 0;
    width:100%;
-   height: 400px;
    background-color: #fff;
    z-index: 9;
-   border-radius: 40px 40px 0 0;
+   border-radius: 30px 30px 0 0;
    overflow: hidden;
    animation: show 300ms linear 1;
+    height: 400px;
   >div {
     &:first-child {
       height: 100%;
@@ -208,13 +242,23 @@
    height: 100%;
    background-repeat: no-repeat;
    background-position: center center;
-   background-size: cover;
+   background-size: 100% 100%;
    filter:blur(10px) !important;
  }
+  .nbv {
+      box-shadow:  0px 0px 0px 0px #ff0000,   /*上边阴影  红色*/
+
+      0px 0px 0px 0px #3bee17,   /*左边阴影  绿色*/
+
+      0px 0px 0px 0px #2279ee,    /*右边阴影  蓝色*/
+
+      0px 3px 10px 0px rgba(0,0,0,0.1);    /*下边阴影  黄色*/;
+   }
   .heads {
    text-align: center;
     letter-spacing: 1px;
     font-weight: 300;
+
    >p {
      color: #fff;
      &:first-child {

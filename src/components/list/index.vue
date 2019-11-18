@@ -3,7 +3,7 @@
     <div class="list-main">
       <div class="content">
       <div class="badge">
-        <i class="l-icon icon-video-play"></i>
+        <i class="l-icon icon-video-play" @click="allSelect"></i>
       </div>
        <p class="f-l">播放全部(共{{list.length}}首)</p>
        <span class="f-r"><i class="l-icon icon-list-menu"></i></span>
@@ -34,11 +34,18 @@
         }
       },
       methods:{
-        ...mapActions(["changeMusic"]),
+        ...mapActions(["changeMusic","changAll"]),
         saveMusic(id,item) {
             this.changeMusic(item);
             this.$router.push(`/radio/${id}`);
 
+        },
+        allSelect() {
+
+
+          this.changAll(this.list);
+
+          this.$router.push(`/radio/${this.list[0].id}`);
         }
       }
   }

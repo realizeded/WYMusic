@@ -32,7 +32,7 @@
            <i class="l-icon icon-new-folder"></i>
            <p v-text="sings.playCount"></p>
          </div>
-         <div class="item">
+         <div class="item" @click="$router.push({path:'/commentPage',query:{id:2}})">
                <i class="l-icon icon-message"></i>
            <p v-text="sings.commentCount"></p>
          </div>
