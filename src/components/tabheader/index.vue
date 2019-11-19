@@ -7,6 +7,11 @@
         </div>
         <div class="f-r">
 
+          <select ref="sel" name="" id="" @change="change" v-model="selectedVal">
+            <option :value="item" v-for="item in cats" :key="item">
+              {{item}}
+            </option>
+          </select>
         </div>
       </div>
       <div class="main">
@@ -26,6 +31,9 @@
 <script>
   export default  {
       name:'tabheader',
+      data() {
+        return {selectedVal:this.cats[0]};
+      },
       props:{
           list:{
               type:Object,
@@ -33,6 +41,19 @@
               default:function(){
                   return {};
               }
+          },
+          cats:{
+              type:Array,
+              required:true,
+              default:function(){
+                  return [];
+              }
+          }
+      },
+      methods:{
+          change(){
+
+             this.$emit('func',this.selectedVal);
           }
       }
   }
