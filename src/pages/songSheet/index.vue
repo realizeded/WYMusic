@@ -75,13 +75,11 @@
             this.isLoading = true;
             this.queryInfo.before = this.hotList[this.hotList.length-1].updateTime;
             this.getHot((res)=>{
-                if(res.playlists.length===0)
-                   return this.$Toast({
-                       message:'没有更多',
-                       position:'bottom'
-                   });
-                  this.hotList.push(...res.playlists);
                 this.isLoading = false;
+                if(res.playlists.length===0)
+                  return this.$Toast("没有更多");
+                  this.hotList.push(...res.playlists);
+
             });
         },
       async getHot(callback){

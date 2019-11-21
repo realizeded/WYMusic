@@ -44,7 +44,7 @@
           },
           cats:{
               type:Array,
-              required:true,
+
               default:function(){
                   return [];
               }
